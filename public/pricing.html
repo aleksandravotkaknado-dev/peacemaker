@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Что ей ответить?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0d0b;--surface:#1a1714;--surface2:#242018;
+  --border:#2e2820;--border2:#3d3528;
+  --accent:#e8a87c;--accent2:#c4714a;
+  --text:#f0ebe4;--text2:#9a8e82;--text3:#5c5248;
+  --green:#7dba8a;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px}
+.wrap{max-width:680px;margin:0 auto;padding:56px 24px 80px;animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px}
+.logo{font-family:'Fraunces',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text2)}
+.header{text-align:center;margin-bottom:56px}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+h1{font-family:'Fraunces',serif;font-size:42px;font-weight:300;line-height:1.15;margin-bottom:14px}
+h1 em{font-style:italic;color:var(--accent)}
+.subtitle{font-size:15px;color:var(--text2);font-weight:300;line-height:1.6}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+@media(max-width:560px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px;position:relative;transition:border-color .2s}
+.plan:hover{border-color:var(--border2)}
+.plan.popular{border-color:var(--accent2)}
+.badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--accent2);color:#fff;font-size:11px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.plan-name{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:16px}
+.plan-price{font-family:'Fraunces',serif;font-size:44px;font-weight:300;line-height:1;margin-bottom:4px}
+.plan-price sup{font-size:20px;vertical-align:top;margin-top:8px;font-family:'DM Sans',sans-serif;font-weight:300}
+.plan-period{font-size:13px;color:var(--text3);margin-bottom:20px}
+.plan-desc{font-size:14px;color:var(--text2);font-weight:300;line-height:1.6;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.features li{font-size:13px;color:var(--text2);font-weight:300;display:flex;align-items:flex-start;gap:10px;line-height:1.4}
+.features li::before{content:'✓';color:var(--green);font-size:13px;flex-shrink:0;margin-top:1px}
+.plan-btn{display:block;width:100%;padding:13px;border-radius:10px;text-align:center;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--accent2);color:#fff;border:none}
+.btn-primary:hover{background:#d4804f}
+.btn-secondary{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.free-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;text-align:center;margin-bottom:32px}
+.free-text{font-size:14px;color:var(--text2);font-weight:300}
+.free-text strong{color:var(--accent);font-weight:500}
+.faq{margin-bottom:40px}
+.faq-title{font-family:'Fraunces',serif;font-size:22px;font-weight:300;margin-bottom:20px;color:var(--text)}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-q{font-size:14px;font-weight:500;color:var(--text);margin-bottom:8px}
+.faq-a{font-size:13px;color:var(--text2);font-weight:300;line-height:1.6}
+footer{text-align:center;padding-top:32px;border-top:1px solid var(--border)}
+footer a{font-size:12px;color:var(--text3);text-decoration:none;margin:0 12px;transition:color .15s}
+footer a:hover{color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <nav class="nav">
+    <a href="/" class="logo">💬 Что ей ответить?</a>
+    <div class="nav-links">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refund">Refund</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <div class="eyebrow">Pricing</div>
+    <h1>Простые<br><em>и честные</em> цены</h1>
+    <p class="subtitle">Платишь только за то что использовал.<br>Никаких скрытых списаний.</p>
+  </div>
+
+  <div class="free-block">
+    <p class="free-text">Начни бесплатно — <strong>3 запроса без оплаты</strong>, регистрация не нужна</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-name">Pack</div>
+      <div class="plan-price"><sup>$</sup>4</div>
+      <div class="plan-period">10 requests</div>
+      <div class="plan-desc">Разовая покупка. Запросы не сгорают — используй когда нужно.</div>
+      <ul class="features">
+        <li>10 анализов переписки</li>
+        <li>До 6 скриншотов за раз</li>
+        <li>3 варианта ответа</li>
+        <li>Без срока действия</li>
+      </ul>
+      <a href="/" class="plan-btn btn-secondary">Купить пак</a>
+    </div>
+
+    <div class="plan popular">
+      <div class="badge">Популярное</div>
+      <div class="plan-name">Monthly</div>
+      <div class="plan-price"><sup>$</sup>9</div>
+      <div class="plan-period">per month</div>
+      <div class="plan-desc">Неограниченные запросы весь месяц. Подходит если ситуация затянулась.</div>
+      <ul class="features">
+        <li>Безлимитные запросы</li>
+        <li>До 6 скриншотов за раз</li>
+        <li>3 варианта ответа</li>
+        <li>Отменить можно в любой момент</li>
+      </ul>
+      <a href="/" class="plan-btn btn-primary">Начать месяц</a>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-title">Вопросы</div>
+    <div class="faq-item">
+      <div class="faq-q">Как работает бесплатный пробный период?</div>
+      <div class="faq-a">Первые 3 запроса полностью бесплатны, карта не нужна. После этого выбираешь удобный план.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Что значит «запросы не сгорают»?</div>
+      <div class="faq-a">Если купил пак из 10 запросов и использовал 3 — оставшиеся 7 будут ждать тебя без ограничений по времени.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Можно ли отменить подписку?</div>
+      <div class="faq-a">Да, в любой момент без штрафов. Доступ сохраняется до конца оплаченного периода.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Мои данные в безопасности?</div>
+      <div class="faq-a">Скриншоты обрабатываются только для генерации ответа и не хранятся на сервере. Подробнее в политике конфиденциальности.</div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/terms">Terms of Service</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/refund">Refund Policy</a>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Что ей ответить?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0d0b;--surface:#1a1714;--surface2:#242018;
+  --border:#2e2820;--border2:#3d3528;
+  --accent:#e8a87c;--accent2:#c4714a;
+  --text:#f0ebe4;--text2:#9a8e82;--text3:#5c5248;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px}
+.wrap{max-width:680px;margin:0 auto;padding:56px 24px 80px;animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px}
+.logo{font-family:'Fraunces',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text2)}
+.doc-header{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.doc-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:500}
+h1{font-family:'Fraunces',serif;font-size:36px;font-weight:300;margin-bottom:12px}
+.doc-meta{font-size:13px;color:var(--text3)}
+.section{margin-bottom:36px}
+h2{font-family:'Fraunces',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+p{font-size:14px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:12px}
+p:last-child{margin-bottom:0}
+ul{margin:0 0 12px 0;padding-left:0;list-style:none}
+ul li{font-size:14px;color:var(--text2);font-weight:300;line-height:1.7;padding-left:20px;position:relative;margin-bottom:6px}
+ul li::before{content:'—';position:absolute;left:0;color:var(--text3)}
+.highlight{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.highlight p{color:var(--text)}
+footer{text-align:center;padding-top:32px;border-top:1px solid var(--border);margin-top:48px}
+footer a{font-size:12px;color:var(--text3);text-decoration:none;margin:0 12px;transition:color .15s}
+footer a:hover{color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <nav class="nav">
+    <a href="/" class="logo">💬 Что ей ответить?</a>
+    <div class="nav-links">
+      <a href="/pricing">Pricing</a>
+      <a href="/terms">Terms</a>
+      <a href="/refund">Refund</a>
+    </div>
+  </nav>
+
+  <div class="doc-header">
+    <div class="doc-label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="doc-meta">Last updated: April 21, 2026</p>
+  </div>
+
+  <div class="section">
+    <h2>1. Who We Are</h2>
+    <p>This Privacy Policy explains how Individualuri Metsarme Aleksandr Zaitsev ("we", "us", "our"), an Individual Entrepreneur registered in Georgia (ID: 345702536), collects, uses, and protects your personal data when you use the Что ей ответить? service ("Service") at avotkaknado.space.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Data We Collect</h2>
+    <p>We collect only the minimum data necessary to provide the Service:</p>
+    <ul>
+      <li><strong style="color:var(--text);font-weight:500">Images you upload</strong> — screenshots of messaging conversations that you voluntarily submit for analysis. These are processed in real time and are not stored on our servers after the response is generated.</li>
+      <li><strong style="color:var(--text);font-weight:500">Text context</strong> — any additional description you type into the context field. Treated the same as uploaded images — processed and discarded.</li>
+      <li><strong style="color:var(--text);font-weight:500">Usage data</strong> — anonymous request counts stored locally in your browser to manage the free trial limit. This data does not leave your device.</li>
+      <li><strong style="color:var(--text);font-weight:500">Payment data</strong> — if you make a purchase, payment information is collected and processed exclusively by Paddle.com. We do not receive or store your card details.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. How We Use Your Data</h2>
+    <p>The images and text you provide are used solely to generate AI-powered message suggestions via the Anthropic Claude API. We do not use your data to train AI models, build user profiles, or share it with third parties for marketing purposes.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Data Retention</h2>
+    <div class="highlight">
+      <p>Uploaded screenshots and text context are not stored after processing. Once the AI response is returned to you, your input data is discarded. We do not maintain a database of user conversations.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>5. Third-Party Services</h2>
+    <p>We use the following third-party services to operate the Service:</p>
+    <ul>
+      <li><strong style="color:var(--text);font-weight:500">Anthropic Claude API</strong> — processes your uploaded content to generate message suggestions. Subject to Anthropic's privacy policy at anthropic.com/privacy.</li>
+      <li><strong style="color:var(--text);font-weight:500">Paddle.com</strong> — handles all payment processing as Merchant of Record. Subject to Paddle's privacy policy at paddle.com/legal/privacy.</li>
+      <li><strong style="color:var(--text);font-weight:500">Vercel</strong> — hosts the Service infrastructure. Subject to Vercel's privacy policy at vercel.com/legal/privacy-policy.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. Cookies</h2>
+    <p>The Service uses minimal browser storage (localStorage) only to track the number of free requests used. No tracking cookies, advertising pixels, or analytics scripts are used.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Your Rights</h2>
+    <p>Since we do not store personal data beyond payment records handled by Paddle, there is no user data to request, correct, or delete on our end. For questions about payment data, contact Paddle directly at paddle.com.</p>
+    <p>If you have any privacy concerns, you may contact us at support@avotkaknado.space and we will respond within 30 days.</p>
+  </div>
+
+  <div class="section">
+    <h2>8. Children's Privacy</h2>
+    <p>The Service is not intended for users under the age of 18. We do not knowingly collect data from minors.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. The updated version will be posted on this page with a revised date. We encourage you to review this page periodically.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Contact</h2>
+    <p>Individualuri Metsarme Aleksandr Zaitsev<br>
+    St. Batumi, Tamar Mefe Avenue N22a, floor 12, apt N143, Georgia<br>
+    support@avotkaknado.space</p>
+  </div>
+
+  <footer>
+    <a href="/pricing">Pricing</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/refund">Refund Policy</a>
+  </footer>
+</div>
+</body>
+</html>
