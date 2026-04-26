@@ -892,6 +892,14 @@ export default function Peacemaker() {
       >
         Купить 10 запросов за $5 →
       </a>
+      
+      href={`https://app.lava.top/products/ef81c153-e07d-4d86-b0f5-bcc563193a79/cb1ca966-695f-4dc9-95f5-74c405fc46d8?email=${encodeURIComponent(email)}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{display:"block", width:"100%", padding:"14px", background:"var(--surface2)", border:"1px solid var(--border2)", borderRadius:"10px", color:"var(--accent)", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", fontWeight:500, textDecoration:"none", marginTop:"8px"}}
+>
+  Безлимит на месяц — $9 →
+</a>
     </div>
   ) : (
     <div className="error-block" style={{marginBottom:"12px"}}>{emailError}</div>
