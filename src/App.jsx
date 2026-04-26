@@ -908,6 +908,7 @@ export default function Peacemaker() {
         href={`https://app.lava.top/products/222f33ed-508f-4cc1-a016-34eaf2e78be5?email=${encodeURIComponent(email)}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => window.fbq && fbq('track', 'InitiateCheckout', {value: 5, currency: 'USD'})}
         style={{display:"block", width:"100%", padding:"14px", background:"var(--accent2)", borderRadius:"10px", color:"#fff", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", fontWeight:500, textDecoration:"none"}}
       >
         Купить 10 запросов за $5 →
@@ -916,6 +917,7 @@ export default function Peacemaker() {
         href={`https://app.lava.top/products/ef81c153-e07d-4d86-b0f5-bcc563193a79/cb1ca966-695f-4dc9-95f5-74c405fc46d8?email=${encodeURIComponent(email)}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => window.fbq && fbq('track', 'InitiateCheckout', {value: 9, currency: 'USD'})}
         style={{display:"block", width:"100%", padding:"14px", background:"var(--surface2)", border:"1px solid var(--border2)", borderRadius:"10px", color:"var(--accent)", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", fontWeight:500, textDecoration:"none", marginTop:"8px"}}
       >
         Безлимит на месяц — $9 →
@@ -1074,6 +1076,7 @@ export default function Peacemaker() {
       href={`https://app.lava.top/products/222f33ed-508f-4cc1-a016-34eaf2e78be5?email=${encodeURIComponent(email)}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => window.fbq && fbq('track', 'InitiateCheckout', {value: 5, currency: 'USD'})}
       style={{display:"block", width:"100%", padding:"13px", background:"var(--accent2)", borderRadius:"10px", color:"#fff", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"14px", fontWeight:500, textDecoration:"none", marginBottom:"8px"}}
     >
       10 запросов — $5 →
@@ -1082,6 +1085,7 @@ export default function Peacemaker() {
       href={`https://app.lava.top/products/ef81c153-e07d-4d86-b0f5-bcc563193a79/cb1ca966-695f-4dc9-95f5-74c405fc46d8?email=${encodeURIComponent(email)}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => window.fbq && fbq('track', 'InitiateCheckout', {value: 9, currency: 'USD'})}
       style={{display:"block", width:"100%", padding:"13px", background:"transparent", border:"1px solid var(--border2)", borderRadius:"10px", color:"var(--accent)", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"14px", fontWeight:500, textDecoration:"none"}}
     >
       Безлимит на месяц — $9 →

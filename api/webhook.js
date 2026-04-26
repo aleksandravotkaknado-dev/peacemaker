@@ -10,7 +10,52 @@ const supabase = createClient(
 // Можно вынести в env или маппить по offerId / product
 const REQUESTS_PER_PURCHASE = 10;
 
+const FB_PIXEL_ID = "2420795101693549";
+const FB_API_VERSION = "v21.0";
+
 // ─── Helpers ──────────────────────────────────────────────────────
+async function sendFbPurchaseEvent(email, amount, currency) {
+  const token = process.env.FB_CONVERSIONS_TOKEN;
+  if (!token) {
+    console.warn("[webhook] FB_CONVERSIONS_TOKEN not set, skipping Purchase event");
+    return;
+  }
+
+  try {
+    const payload = {
+      data: [
+        {
+          event_name: "Purchase",
+          event_time: Math.floor(Date.now() / 1000),
+          action_source: "website",
+          user_data: {
+            em: [await sha256(email.trim().toLowerCase())],
+          },
+          custom_data: {
+            value: amount,
+            currency: currency,
+          },
+        },
+      ],
+    };
+
+    const url = `https://graph.facebook.com/${FB_API_VERSION}/${FB_PIXEL_ID}/events?access_token=${token}`;
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const result = await resp.json();
+    console.log("[webhook] FB Purchase event sent:", JSON.stringify(result));
+  } catch (err) {
+    console.error("[webhook] FB Conversions API error:", err);
+  }
+}
+
+async function sha256(value) {
+  const { createHash } = await import("crypto");
+  return createHash("sha256").update(value).digest("hex");
+}
 function verifyApiKey(req) {
   // Lava.top при типе аутентификации «API key» шлёт ключ
   // в заголовке Authorization (формат может быть «<key>» или «Bearer <key>»).
@@ -122,6 +167,9 @@ export default async function handler(req, res) {
       payload: body,
       processed_at: new Date().toISOString(),
     });
+
+    // 9. Facebook Conversions API — событие Purchase
+    await sendFbPurchaseEvent(email, body.amount || 5, body.currency || "USD");
 
     return res.status(200).json({ ok: true });
   } catch (err) {
