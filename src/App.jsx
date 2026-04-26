@@ -1,4 +1,10 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap');
@@ -657,6 +663,11 @@ export default function Peacemaker() {
   const [copied, setCopied] = useState(null);
   const [freeLeft, setFreeLeft] = useState(3);
   const [cookieAccepted, setCookieAccepted] = useState(true);
+  const [email, setEmail] = useState("");
+  const [userRecord, setUserRecord] = useState(null);
+  const [showEmailGate, setShowEmailGate] = useState(false);
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailError, setEmailError] = useState(null);
   const fileInputRef = useRef();
 
   useEffect(() => {
@@ -667,6 +678,40 @@ export default function Peacemaker() {
   const acceptCookies = () => {
     localStorage.setItem("cookie_accepted", "1");
     setCookieAccepted(true);
+  };
+  const getOrCreateUser = async (emailVal) => {
+    const { data: existing } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", emailVal)
+      .single();
+    if (existing) return existing;
+    const { data: created } = await supabase
+      .from("users")
+      .insert({ email: emailVal })
+      .select()
+      .single();
+    return created;
+  };
+
+  const handleEmailSubmit = async () => {
+    if (!email.trim()) return;
+    setEmailLoading(true);
+    setEmailError(null);
+    try {
+      const user = await getOrCreateUser(email.trim().toLowerCase());
+      if (user.requests_used >= user.requests_limit) {
+        setEmailError("Бесплатные запросы использованы. Нужно купить доступ.");
+        setEmailLoading(false);
+        return;
+      }
+      setUserRecord(user);
+      setShowEmailGate(false);
+      localStorage.setItem("pm_email", email.trim().toLowerCase());
+    } catch(e) {
+      setEmailError("Не удалось проверить email. Попробуй ещё раз.");
+    }
+    setEmailLoading(false);
   };
 
   const toBase64 = (file) => new Promise((res, rej) => {
@@ -714,6 +759,10 @@ export default function Peacemaker() {
 
   const handleSubmit = async () => {
     if (images.length === 0 && !context.trim()) return;
+    if (!userRecord) {
+      setShowEmailGate(true);
+      return;
+    }
     setLoading(true);
     setError(null);
     setResult(null);
@@ -737,18 +786,19 @@ export default function Peacemaker() {
       content.push({ type: "text", text: contextText });
 
       const response = await fetch("https://api.anthropic.com/v1/messages", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "x-api-key": import.meta.env.VITE_ANTHROPIC_KEY,
-    "anthropic-version": "2023-06-01",
-    "anthropic-dangerous-direct-browser-access": "true"
-  },body: JSON.stringify({
-  model: "claude-sonnet-4-20250514",
-  max_tokens: 1000,
-  system: SYSTEM_PROMPT,
-  messages: [{ role: "user", content }],
-}),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": import.meta.env.VITE_ANTHROPIC_KEY,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: [{ role: "user", content }],
+        }),
       });
 
       const data = await response.json();
@@ -760,6 +810,13 @@ export default function Peacemaker() {
 
       setResult(parsed);
       setFreeLeft(prev => Math.max(0, prev - 1));
+      if (userRecord) {
+      await supabase
+        .from("users")
+        .update({ requests_used: userRecord.requests_used + 1 })
+        .eq("id", userRecord.id);
+      setUserRecord(prev => ({ ...prev, requests_used: prev.requests_used + 1 }));
+}
     } catch (err) {
       console.error(err);
       const msg = err.message || "";
@@ -804,7 +861,30 @@ export default function Peacemaker() {
             Осталось бесплатных запросов: {freeLeft}
           </div>
         </div>
-
+{showEmailGate && (
+        <div className="section">
+          <div style={{padding: "28px 20px"}}>
+            <div style={{fontFamily:"'Playfair Display',serif", fontSize:"20px", fontWeight:400, marginBottom:"8px", color:"var(--text)"}}>
+              Куда отправить результат?
+            </div>
+            <div style={{fontSize:"13px", color:"var(--text2)", marginBottom:"20px", fontWeight:300}}>
+              Введи email — это твой доступ к сервису. Первые 3 запроса бесплатно.
+            </div>
+            <input
+              type="email"
+              placeholder="твой@email.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && handleEmailSubmit()}
+              style={{width:"100%", background:"var(--surface2)", border:"1px solid var(--border2)", borderRadius:"10px", padding:"13px 16px", color:"var(--text)", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", outline:"none", marginBottom:"12px"}}
+            />
+            {emailError && <div className="error-block" style={{marginBottom:"12px"}}>{emailError}</div>}
+            <button className="submit-btn" onClick={handleEmailSubmit} disabled={emailLoading}>
+              {emailLoading ? "Проверяю..." : "Продолжить →"}
+            </button>
+          </div>
+        </div>
+      )}
         {!result && !loading && (
           <>
             <div className="section">
