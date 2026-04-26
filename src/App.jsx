@@ -701,7 +701,7 @@ export default function Peacemaker() {
     try {
       const user = await getOrCreateUser(email.trim().toLowerCase());
       if (user.requests_used >= user.requests_limit) {
-        setEmailError("Бесплатные запросы использованы. Нужно купить доступ.");
+        setEmailError("pack_limit");
         setEmailLoading(false);
         return;
       }
@@ -878,7 +878,25 @@ export default function Peacemaker() {
               onKeyDown={e => e.key === "Enter" && handleEmailSubmit()}
               style={{width:"100%", background:"var(--surface2)", border:"1px solid var(--border2)", borderRadius:"10px", padding:"13px 16px", color:"var(--text)", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", outline:"none", marginBottom:"12px"}}
             />
-            {emailError && <div className="error-block" style={{marginBottom:"12px"}}>{emailError}</div>}
+            {emailError && (
+  emailError === "pack_limit" ? (
+    <div style={{marginBottom:"12px"}}>
+      <div className="error-block" style={{marginBottom:"10px"}}>
+        Бесплатные запросы закончились
+      </div>
+      
+        href={`https://app.lava.top/products/222f33ed-508f-4cc1-a016-34eaf2e78be5?email=${encodeURIComponent(email)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{display:"block", width:"100%", padding:"14px", background:"var(--accent2)", borderRadius:"10px", color:"#fff", textAlign:"center", fontFamily:"'DM Sans',sans-serif", fontSize:"15px", fontWeight:500, textDecoration:"none"}}
+      >
+        Купить 10 запросов за $5 →
+      </a>
+    </div>
+  ) : (
+    <div className="error-block" style={{marginBottom:"12px"}}>{emailError}</div>
+  )
+)}
             <button className="submit-btn" onClick={handleEmailSubmit} disabled={emailLoading}>
               {emailLoading ? "Проверяю..." : "Продолжить →"}
             </button>
