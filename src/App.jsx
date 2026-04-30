@@ -1092,10 +1092,15 @@ export default function Peacemaker() {
     </a>
   </div>
 )}
-        <div className="disclaimer">
-          Сервис помогает найти слова — не решает проблему.<br />
-          Честный разговор всегда лучше идеального текста.
-        </div>
+      <div className="disclaimer">
+        Сервис помогает найти слова — не решает проблему.<br />
+        Честный разговор всегда лучше идеального текста.
+      </div>
+      <div style={{textAlign:"center", marginTop:"16px", display:"flex", gap:"16px", justifyContent:"center", flexWrap:"wrap"}}>
+        <a href="/pricing" style={{fontSize:"12px", color:"var(--text3)", textDecoration:"none"}}>Тарифы</a>
+        <a href="/terms" style={{fontSize:"12px", color:"var(--text3)", textDecoration:"none"}}>Условия</a>
+        <a href="/privacy" style={{fontSize:"12px", color:"var(--text3)", textDecoration:"none"}}>Конфиденциальность</a>
+        <a href="/refund" style={{fontSize:"12px", color:"var(--text3)", textDecoration:"none"}}>Возврат</a>
       </div>
 
       {!cookieAccepted && (
